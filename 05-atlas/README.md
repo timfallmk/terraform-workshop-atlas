@@ -10,7 +10,7 @@ Setting up a Git Repository
 
 1. Run
 
-        $ git commit -m "Initial commit"`
+        $ git commit -a -m "Initial commit"`
 
 1. Run
 
@@ -53,7 +53,7 @@ Setting up Packer in Atlas
 1. Change directory (`cd`) into the `05-atlas` directory
 1. Run
 
-        $ git commit -m "Trigger initial builds" --allow-empty
+        $ git commit -m "Trigger initial builds" --allow-empty && git push origin master
 
 1. Look in Atlas UI and see builds running
 
