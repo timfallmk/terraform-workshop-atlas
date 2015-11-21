@@ -116,8 +116,8 @@ resource "aws_instance" "haproxy" {
 
   provisioner "remote-exec" {
     scripts = [
-      "${path.module}/scripts/install-consul.sh"
-      "${path.module}/scripts/install-haproxy.sh"
+      "${path.module}/scripts/install-consul.sh",
+      "${path.module}/scripts/install-haproxy.sh",
     ]
   }
 
