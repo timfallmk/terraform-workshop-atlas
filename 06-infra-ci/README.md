@@ -42,7 +42,7 @@ Making Infrastructure Changes via SCM
   as part of the response pool
 
 
-Making Scary Chagnes via SCM
+Making Scary Changes via SCM
 ----------------------------
 1. Edit the file "terraform/aws.tf" and change the name of the
   `aws_security_group` on line 121
