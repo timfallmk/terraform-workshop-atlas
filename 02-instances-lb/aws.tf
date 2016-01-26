@@ -40,7 +40,7 @@ variable "aws_amis" {
 
 // The private key.
 variable "private_key_path" {
-  default = "keys/terraform-tutorial.pem"
+  default = "keys/terraform-tutorial"
 }
 
 // The public key.
