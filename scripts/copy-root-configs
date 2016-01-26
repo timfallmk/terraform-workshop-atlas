@@ -13,8 +13,8 @@ for d in *; do
     continue
   fi
 
-  if [ "$d" != "scripts" ] && [ "$d" != "keys" ] && [ "$d" != "06-infra-ci" ]; then
-    for f in *.tf; do
+  if [ "$d" != "keys" ] && [ "$d" != "scripts" ] && [ "$d" != "shared" ] && [ "$d" != "06-infra-ci" ]; then
+    for f in shared/*.tf; do
       echo "Copying $f into $d"
       cp "$f" "$d"
     done

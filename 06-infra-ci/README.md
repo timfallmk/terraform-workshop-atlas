@@ -59,12 +59,13 @@ Making Scary Changes via SCM
 
 Tearing it all down
 -------------------
-1. Change directory into the `05-atlas` folder
-1. Run
-
-        $ git pull origin master
-
-1. Change directory into the root folder (`terraform-workshop`)
-1. Run `terraform remote pull` to pull the remote state
-1. Run `terraform destroy 05-atlas/terraform`
-1. Type "yes" to confirm
+1. In Atlas, click on "environments" in the header
+1. Click on your environment
+1. Click on settings
+1. Click "Queue destroy plan" on the bottom of the page - this is just like
+  any other Terraform plan in Atlas, except this will destroy the resources. You
+  will still need to confirm the plan in order to apply the changes.
+1. Once that apply is finished, you can check in the AWS console and see that
+  all the resources have been destroyed.
+1. Back on the settings page, you can optionally delete all of Atlas' metadata
+  about the environment by clicking the red "Delete from Atlas" button.

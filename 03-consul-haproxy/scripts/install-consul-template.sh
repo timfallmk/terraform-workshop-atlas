@@ -7,7 +7,7 @@ sudo apt-get install -y unzip
 
 echo "Fetching Consul Template..."
 cd /tmp
-curl -s -L -o consul-template.zip https://releases.hashicorp.com/consul-template/0.11.1/consul-template_0.11.1_linux_amd64.zip
+curl -s -L -o consul-template.zip https://releases.hashicorp.com/consul-template/0.12.2/consul-template_0.12.2_linux_amd64.zip
 
 echo "Installing Consul Template..."
 unzip /tmp/consul-template.zip

@@ -26,11 +26,12 @@ for d in *; do
     continue
   fi
 
-  if [ "$d" != "scripts" ] && [ "$d" != "keys" ] && [ "$d" != "05-atlas" ] && [ "$d" != "06-infra-ci" ]; then
-    for f in keys/terraform-tutorial.*; do
+  if [ "$d" != "keys" ] && [ "$d" != "scripts" ] && [ "$d" != "shared" ] && [ "$d" != "05-atlas" ] && [ "$d" != "06-infra-ci" ]; then
+    rm -rf "$d/keys"
+    mkdir "$d/keys"
+
+    for f in keys/terraform-tutorial*; do
       echo "Copying $f into $d/keys"
-      rm -rf "$d/keys"
-      mkdir "$d/keys"
       cp "$f" "$d/keys/"
     done
   fi

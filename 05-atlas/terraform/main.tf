@@ -114,7 +114,7 @@ resource "aws_instance" "haproxy" {
 // also push the local variables we have configured (such as our AWS secrets)
 // securely to Atlas.
 //
-// We specify the vcs=false option because we are not using VCS (yet)
+// We specify the vcs=false option because we are not using VCS.
 //
 // Now we can link this environment to GitHub and leverage SCM workflows for our
 // infrastructure! Click on "integrations" in the Atlas UI for this environment

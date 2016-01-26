@@ -1,9 +1,5 @@
-// If we run `terraform plan 01-ssh-keypair` right now, Terraform will error
-// saying that we are missing credentials to connect to AWS. Fill them in using
-// the environment variables:
-
-// export AWS_ACCESS_KEY_ID="..."
-// export AWS_SECRET_KEY="..."
+// If we run `terraform plan 01-ssh-keypair` right now, Terraform prompt for
+// credentials. Let's generate new credentials and add them to the tfvars file.
 
 // Next, run `terraform plan 01-ssh-keypair`. You will notice Terraform uses
 // the "+" to denote a new resource being added. Terraform will similarly use a
