@@ -39,5 +39,6 @@ done
 
 rm -rf 05-atlas/terraform/keys
 mkdir 05-atlas/terraform/keys
+cp keys/terraform-tutorial 05-atlas/terraform/keys/
 cp keys/terraform-tutorial.* 05-atlas/terraform/keys/
 echo "Copying keys/terraform-tutorial.pub into 05-atlas/terraform/keys"
