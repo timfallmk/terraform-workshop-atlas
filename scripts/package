@@ -35,5 +35,4 @@ rm -rf .vagrant
 rm -rf terraform.tfstate*
 rm -rf Vagrantfile.build
 rm -rf scripts/
-rm -rf keys/
 popd

@@ -5,7 +5,20 @@ command line, and recommended workflow. We will create a few resources in AWS
 and then explore various scenarios to get us thinking critically about how
 Terraform manages resources.
 
-Change directory into the `/vagrant` directory to get started.
+Virtual Machine
+---------------
+This training runs in a virtual machine driven by Vagrant. Start the VM by
+running:
+
+    $ vagrant up
+
+And then establish a shell to the machine by running:
+
+    $ vagrant ssh
+
+Change directory into the `/vagrant` directory to get started:
+
+    $ cd /vagrant
 
 Planning
 --------
