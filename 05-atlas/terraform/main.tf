@@ -22,10 +22,10 @@ resource "aws_instance" "web" {
   ami = "${atlas_artifact.web.metadata_full.region-us-east-1}"
 
   instance_type = "t2.micro"
-  key_name      = "${aws_key_pair.terraform-tutorial.key_name}"
-  subnet_id     = "${aws_subnet.terraform-tutorial.id}"
+  key_name      = "${aws_key_pair.hashicorp-training.key_name}"
+  subnet_id     = "${aws_subnet.hashicorp-training.id}"
 
-  vpc_security_group_ids = ["${aws_security_group.terraform-tutorial.id}"]
+  vpc_security_group_ids = ["${aws_security_group.hashicorp-training.id}"]
 
   tags { Name = "web-${count.index}" }
 
@@ -49,10 +49,10 @@ resource "aws_instance" "haproxy" {
   ami = "${atlas_artifact.haproxy.metadata_full.region-us-east-1}"
 
   instance_type = "t2.micro"
-  key_name      = "${aws_key_pair.terraform-tutorial.key_name}"
-  subnet_id     = "${aws_subnet.terraform-tutorial.id}"
+  key_name      = "${aws_key_pair.hashicorp-training.key_name}"
+  subnet_id     = "${aws_subnet.hashicorp-training.id}"
 
-  vpc_security_group_ids = ["${aws_security_group.terraform-tutorial.id}"]
+  vpc_security_group_ids = ["${aws_security_group.hashicorp-training.id}"]
 
   tags { Name = "haproxy" }
 

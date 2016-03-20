@@ -40,21 +40,21 @@ variable "aws_amis" {
 
 // The private key.
 variable "private_key_path" {
-  default = "keys/terraform-tutorial"
+  default = "keys/hashicorp-training"
 }
 
 // The public key.
 variable "public_key_path" {
-  default = "keys/terraform-tutorial.pub"
+  default = "keys/hashicorp-training.pub"
 }
 
 // This uploads our local keypair to AWS so we can access the instance. This
 // tutorial includes a pre-packaged SSH key, so you do not need to worry about
 // using your own local keys if you have them.
-resource "aws_key_pair" "terraform-tutorial" {
+resource "aws_key_pair" "hashicorp-training" {
   // This is the name of the keypair. This will show up in the Amazon console
   // and API output as this "key" (since ssh-rsa AAA... is not descriptive).
-  key_name = "terraform-tutorial"
+  key_name = "hashicorp-training"
 
   // We could hard-code a public key here, as shown below:
   // public_key = "ssh-rsa AAAAB3..."
@@ -68,27 +68,27 @@ resource "aws_key_pair" "terraform-tutorial" {
 // launch will live inside this VPC. We will not spend much detail here, since
 // these are really Amazon-specific configurations and the beauty of Terraform
 // is that you only have to configure them once and forget about it!
-resource "aws_vpc" "terraform-tutorial" {
+resource "aws_vpc" "hashicorp-training" {
   cidr_block           = "10.0.0.0/16"
   enable_dns_hostnames = true
 
-  tags { Name = "terraform-tutorial" }
+  tags { Name = "hashicorp-training" }
 }
 
 // The Internet Gateway is like the public router for your VPC. It provides
 // internet to-from resources inside the VPC.
-resource "aws_internet_gateway" "terraform-tutorial" {
-  vpc_id = "${aws_vpc.terraform-tutorial.id}"
-  tags { Name = "terraform-tutorial" }
+resource "aws_internet_gateway" "hashicorp-training" {
+  vpc_id = "${aws_vpc.hashicorp-training.id}"
+  tags { Name = "hashicorp-training" }
 }
 
 // The subnet is the IP address range resources will occupy inside the VPC. Here
 // we have choosen the 10.0.0.x subnet with a /24. You could choose any class C
 // subnet.
-resource "aws_subnet" "terraform-tutorial" {
-  vpc_id = "${aws_vpc.terraform-tutorial.id}"
+resource "aws_subnet" "hashicorp-training" {
+  vpc_id = "${aws_vpc.hashicorp-training.id}"
   cidr_block = "10.0.0.0/24"
-  tags { Name = "terraform-tutorial" }
+  tags { Name = "hashicorp-training" }
 
   map_public_ip_on_launch = true
 }
@@ -96,30 +96,30 @@ resource "aws_subnet" "terraform-tutorial" {
 // The Routing Table is the mapping of where traffic should go. Here we are
 // telling AWS that all traffic from the local network should be forwarded to
 // the Internet Gateway created above.
-resource "aws_route_table" "terraform-tutorial" {
-  vpc_id = "${aws_vpc.terraform-tutorial.id}"
+resource "aws_route_table" "hashicorp-training" {
+  vpc_id = "${aws_vpc.hashicorp-training.id}"
 
   route {
     cidr_block = "0.0.0.0/0"
-    gateway_id = "${aws_internet_gateway.terraform-tutorial.id}"
+    gateway_id = "${aws_internet_gateway.hashicorp-training.id}"
   }
 
-  tags { Name = "terraform-tutorial" }
+  tags { Name = "hashicorp-training" }
 }
 
 // The Route Table Association binds our subnet and route together.
-resource "aws_route_table_association" "terraform-tutorial" {
-  subnet_id = "${aws_subnet.terraform-tutorial.id}"
-  route_table_id = "${aws_route_table.terraform-tutorial.id}"
+resource "aws_route_table_association" "hashicorp-training" {
+  subnet_id = "${aws_subnet.hashicorp-training.id}"
+  route_table_id = "${aws_route_table.hashicorp-training.id}"
 }
 
 // The AWS Security Group is akin to a firewall. It specifies the inbound
 // (ingress) and outbound (egress) networking rules. This particular security
 // group is intentionally insecure for the purposes of this tutorial. You should
 // only open required ports in a production environment.
-resource "aws_security_group" "terraform-tutorial" {
-  name   = "terraform-tutorial-web"
-  vpc_id = "${aws_vpc.terraform-tutorial.id}"
+resource "aws_security_group" "hashicorp-training" {
+  name   = "hashicorp-training-web"
+  vpc_id = "${aws_vpc.hashicorp-training.id}"
 
   ingress {
     protocol    = -1

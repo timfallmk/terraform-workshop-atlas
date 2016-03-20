@@ -20,24 +20,24 @@ resource "aws_instance" "web" {
   // For demonstration purposes, we will launch the smallest instance.
   instance_type = "t2.micro"
 
-  // We could hard-code the key_name to the string "terraform-tutorial" from
+  // We could hard-code the key_name to the string "hashicorp-training" from
   // above, but Terraform allows us to reference our key pair resource block.
   // This also declares the AWS keypair as a dependency of the aws_instance
   // resource. Terraform builds a graph of all the resources and executes in
   // parallel where possible. If we just hard-coded the name, it is possible
   // Terraform would create the instance first, then create the key, which
   // would raise an error.
-  key_name = "${aws_key_pair.terraform-tutorial.key_name}"
+  key_name = "${aws_key_pair.hashicorp-training.key_name}"
 
   // The subnet_id is the subnet this instance should run in. We can just
   // reference the subnet created by our aws.tf file.
-  subnet_id = "${aws_subnet.terraform-tutorial.id}"
+  subnet_id = "${aws_subnet.hashicorp-training.id}"
 
   // The vpc_security_group_ids specifies the security group(s) this instance
   // belongs to. We can reference the security group created in the aws.tf file.
   // This security group is "wide open" and allows all ingress and egress
   // traffic through.
-  vpc_security_group_ids = ["${aws_security_group.terraform-tutorial.id}"]
+  vpc_security_group_ids = ["${aws_security_group.hashicorp-training.id}"]
 
   // Tags are arbitrary key-value pairs that will be displayed with the instance
   // in the EC2 console. "Name" is important since that is what will be
@@ -82,10 +82,10 @@ resource "aws_elb" "web" {
 
   // This puts the ELB in the same subnet (and thus VPC) as the instances. This
   // is required so the ELB can forward traffic to the instances.
-  subnets = ["${aws_subnet.terraform-tutorial.id}"]
+  subnets = ["${aws_subnet.hashicorp-training.id}"]
 
   // This specifies the security groups the ELB is a part of.
-  security_groups = ["${aws_security_group.terraform-tutorial.id}"]
+  security_groups = ["${aws_security_group.hashicorp-training.id}"]
 
   // This tells the ELB which port(s) to listen on. This block can be specified
   // multiple times to specify multiple ports. We are just using a simple web
@@ -114,7 +114,7 @@ resource "aws_elb" "web" {
   instances = ["${aws_instance.web.*.id}"]
 
   // This names the ELB.
-  tags { Name = "terraform-tutorial" }
+  tags { Name = "hashicorp-training" }
 }
 
 // This tells terrafrom to export (or output) the AWS load balancer's public

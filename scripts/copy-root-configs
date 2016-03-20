@@ -13,16 +13,10 @@ for d in *; do
     continue
   fi
 
-  if [ "$d" != "keys" ] && [ "$d" != "scripts" ] && [ "$d" != "shared" ] && [ "$d" != "05-atlas" ] && [ "$d" != "06-infra-ci" ]; then
+  if [ "$d" != "keys" ] && [ "$d" != "scripts" ] && [ "$d" != "shared" ]; then
     for f in shared/*.tf; do
       echo "Copying $f into $d"
       cp "$f" "$d"
     done
   fi
-done
-
-for f in shared/*.tf; do
-  d="05-atlas/terraform"
-  echo "Copying $f into $d"
-  cp "$f" "$d"
 done

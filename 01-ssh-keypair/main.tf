@@ -16,7 +16,7 @@
 // to the output of the `terraform plan 01-ssh-keypair`.
 
 // If you open the Amazon console and look under EC2 -> Key Pairs, you will see
-// a new keypair has been created named "terraform-tutorial". We can use this
+// a new keypair has been created named "hashicorp-training". We can use this
 // keypair to connect to new EC2 instances created on Amazon in the next parts
 // of this tutorial.
 
@@ -39,10 +39,10 @@
 // What will happen if we rename this resource in Terraform? Suppose we want to
 // add a better description to this key name, including the date of today's
 // tutorial. Update the `key_name` in this Terraform configuration to be
-// "terraform-tutorial-<date>" and run `terraform plan 01-ssh-keypair`.
+// "hashicorp-training-<date>" and run `terraform plan 01-ssh-keypair`.
 // Terraform will detect the rename and alter the resource automatically! We
 // could apply these changes, but let's not do that. The rest of the guides in
-// this tutorial will assume the keypair is named "terraform-tutorial". You can
+// this tutorial will assume the keypair is named "hashicorp-training". You can
 // delete the date from the keypair name and verify nothing has changed by
 // running the `terraform plan 01-ssh-keypair` command again. If you
 // accidentally ran `terraform apply 01-ssh-keypair`, do not worry - just

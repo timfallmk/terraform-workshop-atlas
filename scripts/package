@@ -1,0 +1,39 @@
+#!/usr/bin/env bash
+set -e
+
+# Go to the parent directory of where this script is
+SOURCE="${BASH_SOURCE[0]}"
+while [ -h "$SOURCE" ] ; do SOURCE="$(readlink "$SOURCE")"; done
+DIR="$( cd -P "$( dirname "$SOURCE" )/.." && pwd )"
+cd $DIR
+
+# Cleanup stuff
+./scripts/cleanup
+
+# Generate new ssh keys
+./scripts/generate-new-keys
+
+# Make sure root configs are up-to-date
+./scripts/copy-root-configs
+
+# Copy everything into another directory
+rm -rf "${DIR}-package"
+cp -r "${DIR}" "${DIR}-package"
+pushd "${DIR}-package"
+rm -rf .terraform
+cat > terraform.tfvars <<EOH
+aws_access_key     = ""
+aws_secret_key     = ""
+atlas_token        = ""
+atlas_username     = ""
+atlas_environment  = ""
+EOH
+rm -rf .docker
+rm -rf .git
+rm -rf .terraform
+rm -rf .vagrant
+rm -rf terraform.tfstate*
+rm -rf Vagrantfile.build
+rm -rf scripts/
+rm -rf keys/
+popd

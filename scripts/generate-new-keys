@@ -14,7 +14,7 @@ mkdir keys
 # Generate a new keypair
 ssh-keygen \
   -b 4096 \
-  -f keys/terraform-tutorial \
+  -f keys/hashicorp-training \
   -t rsa \
   -N "" \
   -C training@hashicorp.com
@@ -26,19 +26,13 @@ for d in *; do
     continue
   fi
 
-  if [ "$d" != "keys" ] && [ "$d" != "scripts" ] && [ "$d" != "shared" ] && [ "$d" != "05-atlas" ] && [ "$d" != "06-infra-ci" ]; then
+  if [ "$d" != "keys" ] && [ "$d" != "scripts" ] && [ "$d" != "shared" ]; then
     rm -rf "$d/keys"
     mkdir "$d/keys"
 
-    for f in keys/terraform-tutorial*; do
+    for f in keys/hashicorp-training*; do
       echo "Copying $f into $d/keys"
       cp "$f" "$d/keys/"
     done
   fi
 done
-
-rm -rf 05-atlas/terraform/keys
-mkdir 05-atlas/terraform/keys
-cp keys/terraform-tutorial 05-atlas/terraform/keys/
-cp keys/terraform-tutorial.* 05-atlas/terraform/keys/
-echo "Copying keys/terraform-tutorial.pub into 05-atlas/terraform/keys"
