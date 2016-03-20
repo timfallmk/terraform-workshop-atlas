@@ -40,12 +40,12 @@ variable "aws_amis" {
 
 // The private key.
 variable "private_key_path" {
-  default = "${path.module}/keys/hashicorp-training"
+  default = "keys/hashicorp-training"
 }
 
 // The public key.
 variable "public_key_path" {
-  default = "${path.module}/keys/hashicorp-training.pub"
+  default = "keys/hashicorp-training.pub"
 }
 
 // This uploads our local keypair to AWS so we can access the instance. This
