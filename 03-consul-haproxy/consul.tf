@@ -27,7 +27,3 @@ module "consul" {
   atlas_environment = "${var.atlas_environment}"
   atlas_token       = "${var.atlas_consul_token}"
 }
-
-// This will output the address of the first Consul instance where we can access
-// the Web UI on port 8500.
-output "consul-ui" { value = "${module.consul.ip}:8500/ui" }

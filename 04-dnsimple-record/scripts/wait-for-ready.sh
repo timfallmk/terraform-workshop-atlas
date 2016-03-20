@@ -1,5 +1,4 @@
 #!/bin/bash
-set -e
 
 # Wait for cloud-init to do it's thing
 timeout 180 /bin/bash -c \
@@ -8,7 +7,7 @@ timeout 180 /bin/bash -c \
 # Literally throw away everything cloud-init has done
 echo "Cleaning apt-cache..."
 sudo rm -rf /var/lib/apt/lists/* &>/dev/null
-sudo apt-get --yes clean &>/dev/null
+sudo apt-get -y clean &>/dev/null
 
 echo "Updating apt-cache..."
 sudo apt-get update &>/dev/null

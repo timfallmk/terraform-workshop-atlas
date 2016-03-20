@@ -121,13 +121,3 @@ resource "aws_elb" "web" {
 // DNS. It also outputs each instance's IP address for reference.
 output "elb-address" { value = "${aws_elb.web.dns_name}" }
 output "instance-ips" { value = "${join(", ", aws_instance.web.*.public_ip)}"}
-
-// Run `terraform apply 02-instances-lb` and Terraform will create three new
-// instances, a load balancer, and all the pieces to wire them together.
-
-// Once the apply has finished, AWS will health check the instances and then add
-// them to the load balancer if they pass. This process can take a few minutes
-// the first time. For this reason, you can visit each of the IP addresses of
-// the instances first. Once the load balancer is healthy with all three
-// instances, go to the address in your browser. Keep refreshing the page and
-// you should see different IP addresses cycle for the three instances.
