@@ -26,4 +26,4 @@ resource "dnsimple_record" "web" {
 }
 
 // Output the DNS address so you can easily copy-paste into the browser.
-output "web" { value = "${dnsimple_record.web.hostname}" }
+output "address" { value = "${dnsimple_record.web.hostname}" }

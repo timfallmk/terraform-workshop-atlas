@@ -11,5 +11,5 @@ module "consul" {
   private_key_path = "${path.module}/${var.private_key_path}"
 
   atlas_environment = "${var.atlas_environment}"
-  atlas_token       = "${var.atlas_consul_token}"
+  atlas_token       = "${var.atlas_token}"
 }

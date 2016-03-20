@@ -20,12 +20,14 @@ environment variable to authenticate you with Atlas:
 
     $ export ATLAS_TOKEN="$(cat terraform.tfvars | grep atlas_token | cut -d'=' -f2 | tr -d '"' | tr -d ' ')"
 
+Next, grab the name of your environment:
+
+    $ export ATLAS_ENV="$(cat terraform.tfvars | grep atlas_environment | cut -d'=' -f2 | tr -d '"' | tr -d ' ')"
+
 The way we send our state to Atlas is via the following commands. Similar to
 git, first we configure the remote:
 
-    $ terraform remote config \
-        -backend="atlas" \
-        -backend-config="name=<username>/training"
+    $ terraform remote config -backend="atlas" -backend-config="name=$ATLAS_ENV"
 
 Be sure to replace "<username>" with your Atlas username. This will configure
 the remote state. Now we need to push our copy to Atlas:
@@ -41,10 +43,7 @@ Local Files Push
 We could connect to GitHub, but since we have our Terraform configurations
 locally, let's just upload them to Atlas now:
 
-  $ terraform push \
-      -vcs=false \
-      -name="<username>/training" \
-      05-atlas
+  $ terraform push -vcs=false -name="$ATLAS_ENV" ./05-atlas
 
 Be sure to replace "<username>" with your Atlas username (the same you used
 for configuring the remote state).
@@ -76,13 +75,13 @@ actual repository will be `<username>/training`. Once created, we need to
 configure our local Git setup to be able to push to GitHub.
 
 ```
-pushd 05-atlas
+cd 05-atlas
 git init .
 git add .
 git commit -m "Initial commit"
 git remote add origin https://github.com/<username>/training.git
 git push -u origin master
-popd
+cd ..
 ```
 
 Don't forget to replace `<username>` with your GitHub username. If you refresh

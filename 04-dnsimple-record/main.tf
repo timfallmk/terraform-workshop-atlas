@@ -82,5 +82,3 @@ resource "aws_instance" "haproxy" {
     ]
   }
 }
-
-output "lb-address" { value = "${aws_instance.haproxy.public_dns}" }

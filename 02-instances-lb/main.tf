@@ -119,5 +119,5 @@ resource "aws_elb" "web" {
 
 // This tells terrafrom to export (or output) the AWS load balancer's public
 // DNS. It also outputs each instance's IP address for reference.
-output "elb-address" { value = "${aws_elb.web.dns_name}" }
+output "lb-address" { value = "${aws_elb.web.dns_name}" }
 output "instance-ips" { value = "${join(", ", aws_instance.web.*.public_ip)}"}

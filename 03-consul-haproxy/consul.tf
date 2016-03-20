@@ -25,5 +25,5 @@ module "consul" {
   // IP address to join the initial cluster, and it gives us the web interface
   // in Atlas.
   atlas_environment = "${var.atlas_environment}"
-  atlas_token       = "${var.atlas_consul_token}"
+  atlas_token       = "${var.atlas_token}"
 }

@@ -53,6 +53,9 @@ aws_secret_key     = "2u02ak..."
 atlas_token        = "...atlas.v1..."
 atlas_username     = "sethvargo"
 atlas_environment  = "sethvargo/training"
+dnsimple_email     = "sethvargo+terraform@gmail.com"
+dnsimple_token     = ""
+dnsimple_subdomain = ""
 ```
 
 Your values may differ slightly. It is important that the `atlas_username` is

@@ -27,6 +27,9 @@ aws_secret_key     = ""
 atlas_token        = ""
 atlas_username     = ""
 atlas_environment  = ""
+dnsimple_email     = ""
+dnsimple_token     = ""
+dnsimple_subdomain = ""
 EOH
 rm -rf .docker
 rm -rf .git
