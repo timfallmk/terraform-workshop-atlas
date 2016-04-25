@@ -12,7 +12,9 @@ resource "aws_instance" "web" {
 
   vpc_security_group_ids = ["${aws_security_group.hashicorp-training.id}"]
 
-  tags { Name = "web-${count.index}" }
+  tags {
+    Name = "web-${count.index}"
+  }
 
   connection {
     user     = "ubuntu"
@@ -52,7 +54,9 @@ resource "aws_instance" "haproxy" {
 
   vpc_security_group_ids = ["${aws_security_group.hashicorp-training.id}"]
 
-  tags { Name = "haproxy" }
+  tags {
+    Name = "haproxy"
+  }
 
   connection {
     user     = "ubuntu"
