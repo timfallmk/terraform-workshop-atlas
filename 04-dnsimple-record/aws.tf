@@ -7,7 +7,6 @@ variable "aws_region" {
 
 # These values come from your AWS credentials.
 variable "aws_access_key" {}
-
 variable "aws_secret_key" {}
 
 # This stanza declares the default region for our provider. The other
