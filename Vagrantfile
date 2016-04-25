@@ -10,4 +10,9 @@ Vagrant.configure(2) do |config|
     v.customize ["modifyvm", :id, "--memory", "4096"]
     v.customize ["modifyvm", :id, "--nictype1", "virtio"]
   end
+
+  # Support for a Docker based setup
+  config.vm.provider "docker" do |d|
+    d.image = "ubuntu:14.04"
+  end
 end
