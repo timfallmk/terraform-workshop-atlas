@@ -1,5 +1,5 @@
-// Here we are defining some new variables. These variables' values come from
-// the terraform.tfvars value we filled out at the start of training.
+# Here we are defining some new variables. These variables' values come from
+# the terraform.tfvars value we filled out at the start of training.
 variable "atlas_username" {}
 variable "atlas_token" {}
 variable "atlas_environment" {}
@@ -21,8 +21,8 @@ resource "aws_instance" "web" {
     key_file = "${path.module}/${var.private_key_path}"
   }
 
-  // Add our Consul Template input template - this will be used to render our
-  // dynamic HTML page for apache.
+  # Add our Consul Template input template - this will be used to render our
+  # dynamic HTML page for apache.
   provisioner "file" {
     source      = "${path.module}/scripts/web/index.html.ctmpl"
     destination = "/tmp/index.html.ctmpl"
@@ -30,27 +30,27 @@ resource "aws_instance" "web" {
 
   provisioner "remote-exec" {
     scripts = [
-      // The first remote-exec provisioner is used to wait for cloud-init (which
-      // is an AWS-EC2-specific thing) to finish. Without this line, Terraform
-      // may try to provision the instance before apt has updated all its
-      // sources. This is an implementation detail of an operating system and
-      // the way it runs on the cloud platform; this is not a Terraform bug.
+      # The first remote-exec provisioner is used to wait for cloud-init (which
+      # is an AWS-EC2-specific thing) to finish. Without this line, Terraform
+      # may try to provision the instance before apt has updated all its
+      # sources. This is an implementation detail of an operating system and
+      # the way it runs on the cloud platform; this is not a Terraform bug.
       "${path.module}/scripts/wait-for-ready.sh",
 
-      // First we will install the Consul client.
+      # First we will install the Consul client.
       "${path.module}/scripts/consul-client/install.sh",
 
-      // Install Consul Template, which will be used to render our dynamic
-      // index.html pages.
+      # Install Consul Template, which will be used to render our dynamic
+      # index.html pages.
       "${path.module}/scripts/consul-template/install.sh",
 
-      // Next, install our webserver, apache.
+      # Next, install our webserver, apache.
       "${path.module}/scripts/web/install.sh",
     ]
   }
 
-  // Lastly, export our Consul configuration. This is the "runtime"
-  // configuration piece.
+  # Lastly, export our Consul configuration. This is the "runtime"
+  # configuration piece.
   provisioner "remote-exec" {
     inline = [
       "echo 'ATLAS_ENVIRONMENT=${var.atlas_environment}' | sudo tee -a /etc/service/consul &>/dev/null",
@@ -61,9 +61,9 @@ resource "aws_instance" "web" {
   }
 }
 
-// This is replacing the ELB from 04-load-balancer. Instead of using Amazon's
-// load balancer, we will use our own. Most of these attributes should already
-// be familiar to you, so we will skip down to the provisioner.
+# This is replacing the ELB from 04-load-balancer. Instead of using Amazon's
+# load balancer, we will use our own. Most of these attributes should already
+# be familiar to you, so we will skip down to the provisioner.
 resource "aws_instance" "haproxy" {
   ami = "${lookup(var.aws_amis, var.aws_region)}"
 
@@ -80,8 +80,8 @@ resource "aws_instance" "haproxy" {
     key_file = "${path.module}/${var.private_key_path}"
   }
 
-  // Add our Consul Template input template - this will be used to dynamically
-  // configure haproxy.
+  # Add our Consul Template input template - this will be used to dynamically
+  # configure haproxy.
   provisioner "file" {
     source      = "${path.module}/scripts/lb/haproxy.cfg.ctmpl"
     destination = "/tmp/haproxy.cfg.ctmpl"
@@ -89,22 +89,22 @@ resource "aws_instance" "haproxy" {
 
   provisioner "remote-exec" {
     scripts = [
-      // Same wait for ready script.
+      # Same wait for ready script.
       "${path.module}/scripts/wait-for-ready.sh",
 
-      // First we will install the Consul client.
+      # First we will install the Consul client.
       "${path.module}/scripts/consul-client/install.sh",
 
-      // Install Consul Template, which will be used to render our dynamic
-      // haproxy configuration.
+      # Install Consul Template, which will be used to render our dynamic
+      # haproxy configuration.
       "${path.module}/scripts/consul-template/install.sh",
 
-      // Next, install our loadbalancer, haproxy.
+      # Next, install our loadbalancer, haproxy.
       "${path.module}/scripts/lb/install.sh",
     ]
   }
 
-  // This is the same runtime configuration as above.
+  # This is the same runtime configuration as above.
   provisioner "remote-exec" {
     inline = [
       "echo 'ATLAS_ENVIRONMENT=${var.atlas_environment}' | sudo tee -a /etc/service/consul &>/dev/null",
@@ -115,5 +115,5 @@ resource "aws_instance" "haproxy" {
   }
 }
 
-// This is the address of the ELB.
+# This is the address of the ELB.
 output "lb-address" { value = "${aws_instance.haproxy.public_dns}" }
