@@ -29,8 +29,7 @@ git, first we configure the remote:
 
     $ terraform remote config -backend="atlas" -backend-config="name=$ATLAS_ENV"
 
-Be sure to replace "<username>" with your Atlas username. This will configure
-the remote state. Now we need to push our copy to Atlas:
+This will configure the remote state. Now we need to push our copy to Atlas:
 
     $ terraform remote push
 
@@ -43,10 +42,7 @@ Local Files Push
 We could connect to GitHub, but since we have our Terraform configurations
 locally, let's just upload them to Atlas now:
 
-  $ terraform push -vcs=false -name="$ATLAS_ENV" ./05-atlas
-
-Be sure to replace "<username>" with your Atlas username (the same you used
-for configuring the remote state).
+    $ terraform push -vcs=false -name="$ATLAS_ENV" ./05-atlas
 
 This will push our local Terraform files to Atlas and trigger a plan. It will
 also push the local variables we have configured (such as our AWS secrets)
